@@ -1,57 +1,25 @@
-# qcp-lib-java
+﻿# qcp-lib-java
 
-Java binding for QCP protocol.
-
-## Installation
-
-### Maven
-
-```xml
-<dependency>
-    <groupId>com.neko233</groupId>
-    <artifactId>qcp-lib-java</artifactId>
-    <version>1.0.0</version>
-</dependency>
-```
-
-### Gradle
-
-```groovy
-implementation 'com.neko233:qcp-lib-java:1.0.0'
-```
-
-## Usage
-
-```java
-import com.neko233.qcp.QcpClient;
-
-public class Main {
-    public static void main(String[] args) {
-        // Create QCP client
-        QcpClient client = new QcpClient();
-        
-        // Connect to server
-        client.connect("127.0.0.1", 9000);
-        
-        // Send data
-        client.send("hello".getBytes());
-        
-        // Receive data
-        byte[] buffer = new byte[1024];
-        int n = client.receive(buffer);
-        
-        // Close
-        client.close();
-    }
-}
-```
+QCP java binding - 2026 reliable UDP protocol
 
 ## Features
 
-- Thread-safe
-- Non-blocking I/O
-- Configurable parameters
-- Android compatible
+- FEC-First reliability (Forward Error Correction)
+- Zero-Copy Ring Buffer
+- Lock-Free queues
+- 3-channel priority system
+- 10-byte header (vs KCP 24 bytes)
+
+## Installation
+
+See README in each language directory.
+
+## Protocol
+
+QCP uses FEC instead of ARQ for reliability:
+- FEC provides instant recovery (no retransmission delay)
+- ARQ only as fallback (rare cases)
+- More reliable than KCP
 
 ## License
 
